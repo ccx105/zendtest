@@ -1,0 +1,40 @@
+<?php 
+
+$this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css');
+$this->headLink()->appendStylesheet('/css/animations.css');
+
+$this->headScript()->appendFile('http://code.jquery.com/jquery-1.10.2.js','text/javascript');
+$this->headScript()->appendFile('http://code.jquery.com/ui/1.11.2/jquery-ui.js','text/javascript');
+
+$this->headScript()->appendScript(
+'$(function() {
+$( ".draggable" ).draggable();
+});', 'text/javascript');
+
+?>
+
+<h1>
+	Images Canvas
+</h1>
+
+<table class="table">
+	<tr>
+		<td>
+			<div class="draggable">
+				<img width="250px;" src="/img/1.jpg" />
+			</div>
+		</td>
+		<td>
+			<div class="draggable">
+				<img width="250px;" src="/img/2.jpg" />
+			</div>
+		</td>
+		<td>
+			<div class="draggable">
+				<img width="250px;" src="/img/3.jpg" />
+			</div>
+		</td>
+	</tr>
+	
+</table>
+

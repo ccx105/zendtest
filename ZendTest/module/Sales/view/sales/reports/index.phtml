@@ -1,0 +1,79 @@
+<h1>Sales Report</h1>
+<table class="table">
+	<tr>
+		<th>
+			Invoice Number: 
+		</th>
+		<th>
+			Product:
+		</th>
+		<th>
+			Quantity:
+		</th>
+		<th>
+			Price at purchase:
+		</th>
+		<th>
+			Total Taxes:
+		</th>
+		<th>
+			Total:
+		</th>
+	</tr>
+<?php
+
+$totalQuantity = 0;
+$totalTaxes = 0;
+$totalSales = 0;
+
+foreach ($sales as $sale) {
+	?>
+	<tr>
+		<td>
+			<?php echo $this->escapeHtml($sale->sale_id); ?>
+		</td>
+		<td>
+			<?php echo $this->escapeHtml($sale->name); ?>
+		</td>
+		<td>
+			<?php echo $this->escapeHtml($sale->quantity); ?>
+		</td>
+		<td>
+			$ <?php echo $this->escapeHtml(round($sale->unit_price, 2)); ?>
+		</td>
+		<td>
+			$ <?php echo $this->escapeHtml(round($sale->unit_price * $sale->quantity * 0.06,2)); ?>
+		</td>
+		<td>
+			$ <?php echo $this->escapeHtml(round($sale->unit_price * $sale->quantity * 0.06 + $sale->unit_price * $sale->quantity,2)); ?>
+		</td>
+	</tr>
+	<?php
+	
+	
+	$totalQuantity += $sale->quantity;
+	$totalTaxes += $sale->unit_price * 0.06 * $sale->quantity;
+	$totalSales += $sale->unit_price * 0.06 * $sale->quantity + $sale->unit_price * $sale->quantity;
+}
+?>
+	<tr>
+		<td>
+			Totals:
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>
+			<?php echo round($this->escapeHtml($totalQuantity),2); ?>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>
+			$ <?php echo round($this->escapeHtml($totalTaxes),2); ?>
+		</td>
+		<td>
+			$ <?php echo round($this->escapeHtml($totalSales),2); ?>
+		</td>
+	</tr>
+</table>
